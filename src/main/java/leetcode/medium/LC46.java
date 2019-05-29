@@ -13,7 +13,7 @@ import java.util.List;
 public class LC46 {
 
     public static void main(String[] args) {
-        System.out.println(new LC46().permute(new int[]{1, 2, 3, 5, 8}));
+        System.out.println(new LC46().permute(new int[]{1, 2, 3}));
     }
 
     public List<List<Integer>> permute(int[] nums) {

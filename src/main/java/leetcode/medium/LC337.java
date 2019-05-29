@@ -1,22 +1,24 @@
+package leetcode.medium;
+
 import structure.tree.TreeNode;
 import structure.tree.TreeUtils;
 
 import java.util.Arrays;
 
 /**
- * Created by Sky on 2019/3/30
+ * Created by 44399 on 2019/5/25
  *
- * @author Sky
+ * @author 44399
  */
-public class Sample1 {
+public class LC337 {
 
     public static void main(String[] args) {
         TreeNode root = TreeUtils.buildCompleteBinaryTree(
                 Arrays.asList(3, 4, 5, 1, 3, null, 1));
-        System.out.println(new Sample1().robTree(root));
+        System.out.println(new LC337().rob(root));
     }
 
-    public int robTree(TreeNode root) {
+    public int rob(TreeNode root) {
         if (root == null) {
             return 0;
         }
@@ -25,12 +27,11 @@ public class Sample1 {
         }
         int dpRoot = root.val;
         if (root.left != null) {
-            dpRoot += robTree(root.left.left) + robTree(root.left.right);
+            dpRoot += rob(root.left.left) + rob(root.left.right);
         }
         if (root.right != null) {
-            dpRoot += robTree(root.right.left) + robTree(root.right.right);
+            dpRoot += rob(root.right.left) + rob(root.right.right);
         }
-        return Math.max(dpRoot, robTree(root.left) + robTree(root.right));
+        return Math.max(dpRoot, rob(root.left) + rob(root.right));
     }
-
 }

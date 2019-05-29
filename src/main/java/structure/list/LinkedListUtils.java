@@ -1,6 +1,8 @@
 package structure.list;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by 44399 on 2019/2/13
