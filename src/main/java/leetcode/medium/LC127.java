@@ -30,36 +30,43 @@ public class LC127 {
             }
         }
         for (int i = 0; i < len; i++) {
-            distance[len][i] = wordDistance(beginWord, wordList.get(i)) == 1 ? 1 : Integer.MAX_VALUE;
-            distance[i][len] = distance[len][i];
+            int dis;
+            if ((dis = wordDistance(beginWord, wordList.get(i))) <= 1) {
+                distance[len][i] = dis;
+                distance[i][len] = distance[len][i];
+            }
         }
 
         Set<Integer> traversedWordIndices = new HashSet<>(len);
         int baseDistance = 0;
 
-        int a = 0;
+        int a = len;
         int startingWordIndex = 0;
         do {
             int minDistance = Integer.MAX_VALUE;
             for (int i = 0; i < len; i++) {
-                if (distance[a][i] < minDistance) {
+                if (!traversedWordIndices.contains(i) && distance[a][i] < minDistance) {
                     startingWordIndex = i;
                 }
+            }
+            if (startingWordIndex == a) {
+                return 0;
             }
             traversedWordIndices.add(startingWordIndex);
             String startingWord = wordList.get(startingWordIndex);
             baseDistance += distance[a][startingWordIndex];
             if (startingWordIndex == targetWordIndex) {
-                return baseDistance;
+                return wordList.contains(beginWord) ? baseDistance : baseDistance + 1;
             }
             if (traversedWordIndices.size() == len) {
                 return 0;
             }
             for (int i = 0; i < len; i++) {
                 if (!traversedWordIndices.contains(i)) {
-                    if (wordDistance(startingWord, wordList.get(i)) == 1) {
-                        distance[startingWordIndex][i] = 1;
-                        distance[i][startingWordIndex] = 1;
+                    int dis;
+                    if ((dis = wordDistance(startingWord, wordList.get(i))) <= 1) {
+                        distance[startingWordIndex][i] = dis;
+                        distance[i][startingWordIndex] = dis;
                         if (baseDistance + distance[startingWordIndex][i] < distance[len][i]) {
                             distance[len][i] = baseDistance + distance[startingWordIndex][i];
                             distance[i][len] = distance[len][i];
