@@ -13,39 +13,51 @@ public class QuickSort implements Sort {
             return;
         }
         sort(nums, 0, nums.length - 1);
-
     }
 
-    private void sort(int[] nums, int begin, int end) {
+    private static void sort(int[] nums, int begin, int end) {
         if (begin >= end) {
             return;
         }
-        int i = begin;
-        int j = end;
-        int key = nums[begin];
+        int i = begin, j = end, mid = (i + j) / 2, pivot = nums[mid], tmp;
         while (i < j) {
-            while (nums[j] >= key && j > i) {
+            while (i < j && nums[j] >= pivot) {
                 j--;
             }
-            if (i == j) {
-                break;
-            }
-            swap(nums, i, j);
-            while (nums[i] <= key && i < j) {
+            tmp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = tmp;
+            while (i < j && nums[i] <= pivot) {
                 i++;
             }
-            if (i == j) {
-                break;
-            }
-            swap(nums, i, j);
+            tmp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = tmp;
         }
-        sort(nums, begin, i);
-        sort(nums, j + 1, end);
+        sort(nums, begin, mid - 1);
+        sort(nums, mid + 1, end);
     }
 
-    private static void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
+
+    private static void sort2(int[] nums, int begin, int end) {
+        if (begin >= end) {
+            return;
+        }
+        int i = begin, j = end, pivot = nums[begin], tmp;
+        while (i < j) {
+            while (j > i && nums[j] >= pivot) {
+                j--;
+            }
+            while (i < j && nums[i] <= pivot) {
+                i++;
+            }
+            if (i < j) {
+                tmp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = tmp;
+            }
+        }
+        sort2(nums, begin, i - 1);
+        sort2(nums, j + 1, end);
     }
 }
