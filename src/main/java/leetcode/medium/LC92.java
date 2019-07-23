@@ -11,7 +11,7 @@ import structure.list.ListNode;
 public class LC92 {
 
     public static void main(String[] args) {
-        ListNode head = LinkedListUtils.createLinkedList(new int[]{1, 2, 3, 4});
+        ListNode head = LinkedListUtils.createLinkedList(1, 2, 3, 4);
         LinkedListUtils.printLinkedList(new LC92().reverseBetween(head, 1, 3));
     }
 

@@ -15,7 +15,7 @@ import java.util.List;
 public class LC113 {
 
     public static void main(String[] args) {
-        TreeNode root = TreeUtils.buildCompleteBinaryTree(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, null, 5, 1);
+        TreeNode root = TreeUtils.buildBinaryTree(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, null, 5, 1);
         System.out.println(new LC113().pathSum(root, 22));
     }
 

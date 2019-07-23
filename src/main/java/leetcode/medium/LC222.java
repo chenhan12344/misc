@@ -14,7 +14,7 @@ import java.util.Queue;
 public class LC222 {
 
     public static void main(String[] args) {
-        TreeNode root = TreeUtils.buildCompleteBinaryTree(
+        TreeNode root = TreeUtils.buildBinaryTree(
 
         );
         System.out.println(new LC222().countNodes(root));

@@ -35,33 +35,32 @@ public class MergeList {
         if (list2 == null) {
             return list1;
         }
-        ListNode i = list1, j = list2;
         /* 保证每次i都从较小的一个链表开始 */
         if (list1.val > list2.val) {
-            i = list2;
-            j = list1;
+            ListNode tmp = list1;
+            list1 = list2;
+            list2 = tmp;
         }
+        ListNode i = list1, j = list2;
         ListNode iNext = i.next, tmp;
         while (i.next != null && j != null) {
             /* 若节点j的值介于节点i的值和iNext的值之间，则将节点j插入到节点i和iNext之间 */
-            if (i.val <= j.val && j.val < iNext.val) {
+            if (i.val <= j.val && j.val <= iNext.val) {
                 tmp = j.next;
                 i.next = j;
                 j.next = iNext;
                 j = tmp;
                 i = i.next;
-                continue;
-            }
-            if (i.val > j.val) {
-                j = j.next;
             } else {
                 i = i.next;
                 iNext = i.next;
             }
         }
         /* 此时list1已经遍历完成，如果list2末尾还有多余的节点，则将其直接链接到list1的尾部 */
-        i.next = j;
-        return list1.val > list2.val ? list2 : list1;
+        if (j != null) {
+            i.next = j;
+        }
+        return list1;
     }
 
 }
