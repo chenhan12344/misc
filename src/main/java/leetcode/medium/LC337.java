@@ -3,8 +3,6 @@ package leetcode.medium;
 import structure.tree.TreeNode;
 import structure.tree.TreeUtils;
 
-import java.util.Arrays;
-
 /**
  * Created by 44399 on 2019/5/25
  *
@@ -13,8 +11,7 @@ import java.util.Arrays;
 public class LC337 {
 
     public static void main(String[] args) {
-        TreeNode root = TreeUtils.buildCompleteBinaryTree(
-                Arrays.asList(3, 4, 5, 1, 3, null, 1));
+        TreeNode root = TreeUtils.buildBinaryTree(3, 4, 5, 1, 3, null, 1);
         System.out.println(new LC337().rob(root));
     }
 

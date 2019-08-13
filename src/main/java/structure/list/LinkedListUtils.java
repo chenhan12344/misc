@@ -1,16 +1,21 @@
 package structure.list;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by 44399 on 2019/2/13
+ * 链表工具类
  *
  * @author 44399
  */
 public class LinkedListUtils {
 
+    /**
+     * 打印链表
+     *
+     * @param head 链表表头
+     */
     public static void printLinkedList(ListNode head) {
         List<String> nums = new LinkedList<>();
         while (head != null) {
@@ -20,27 +25,21 @@ public class LinkedListUtils {
         System.out.println(String.join(" -> ", nums));
     }
 
-    public static ListNode createLinkedList(List<Integer> vals) {
-        int[] nums = new int[vals.size()];
-        for (int i = 0; i < vals.size(); i++) {
-            nums[i] = vals.get(i);
-        }
-        return createLinkedList(nums);
-    }
-
-    public static ListNode createLinkedList(int[] vals) {
-        int len = vals.length;
+    /**
+     * 创建链表
+     *
+     * @param items 链表元素
+     * @return 链表表头
+     */
+    public static ListNode createLinkedList(Integer... items) {
+        int len = items.length;
         if (len == 0) {
             return null;
         }
-        ListNode head = new ListNode(vals[len - 1]);
+        ListNode head = new ListNode(items[len - 1]);
         for (int i = len - 2; i >= 0; i--) {
-            head = new ListNode(vals[i], head);
+            head = new ListNode(items[i], head);
         }
         return head;
-    }
-
-    public static ListNode createLinkedList(Integer... vals) {
-        return createLinkedList(Arrays.asList(vals));
     }
 }

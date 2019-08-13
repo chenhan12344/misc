@@ -2,6 +2,7 @@ package structure.list;
 
 /**
  * Created by Sky on 2019/1/22
+ * 链表节点
  *
  * @author Sky
  */
@@ -11,7 +12,6 @@ public class ListNode {
     public ListNode next;
 
     public ListNode() {
-
     }
 
     public ListNode(int val) {
