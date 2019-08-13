@@ -2,6 +2,7 @@ package leetcode.medium;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by 44399 on 2019/6/23
@@ -9,6 +10,28 @@ import java.util.Map;
  * @author 44399
  */
 public class LC304 {
+
+
+    public int[] pickNRadomNumbers(int[] nums, int n) {
+        int m = nums.length;
+        int[] pickedNumbers = new int[n];
+        Random random = new Random();
+        for (int i = 0; i < n; i++) {
+            // 从第0个数开始到n-1个数，从数组总随机选取一个数与之交换
+            int j = random.nextInt(m - i) + i;
+            swap(nums, i, j);
+        }
+        // 最后选取前n个数
+        System.arraycopy(nums, 0, pickedNumbers, 0, n);
+        return pickedNumbers;
+    }
+
+    private static void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+
 
     class NumMatrix {
 
