@@ -17,18 +17,19 @@ public class NumberOfOne {
     }
 
     public int NumberOf1Between1AndN_Solution(int n) {
-        int res = 0;
-        int exp = 10;
-        while (true) {
-            int a = n / 10;
-            res += a;
-            int b = n % exp;
-            if (b > exp / 10) {
-                res += exp / 10;
-            } else {
-                res +=
-            }
-            exp *= 10;
-        }
+        return 0;
+//        int res = 0;
+//        int exp = 10;
+//        while (true) {
+//            int a = n / 10;
+//            res += a;
+//            int b = n % exp;
+//            if (b > exp / 10) {
+//                res += exp / 10;
+//            } else {
+//                res +=
+//            }
+//            exp *= 10;
+//        }
     }
 }
