@@ -41,6 +41,7 @@ public class ProxyFactory implements InvocationHandler {
         Object result = null;
         try {
             before();
+
             result = method.invoke(target, args);
             after();
         } catch (Exception e) {

@@ -12,66 +12,121 @@ import java.util.List;
  */
 public class TreeUtils {
 
+    private static final List<Integer> EMPTY_LIST = new ArrayList<>(0);
+
     /**
      * 先序遍历（递归）
      */
-    public static List<Integer> preorderTraversal(final TreeNode root) {
+    public static List<Integer> preorderTraversalRecursive(final TreeNode root) {
         if (root == null) {
-            return new ArrayList<>(0);
+            return EMPTY_LIST;
         }
         List<Integer> results = new LinkedList<>();
         results.add(root.val);
-        results.addAll(preorderTraversal(root.left));
-        results.addAll(preorderTraversal(root.right));
+        results.addAll(preorderTraversalRecursive(root.left));
+        results.addAll(preorderTraversalRecursive(root.right));
         return results;
     }
 
     /**
-     * 先序遍历（循环）
+     * 先序遍历（迭代）
      */
-    public static List<Integer> preorderTraversalLoop(final TreeNode root) {
+    public static List<Integer> preorderTraversalIterative(final TreeNode root) {
         if (root == null) {
-            return new ArrayList<>(0);
+            return EMPTY_LIST;
         }
-        List<Integer> results = new ArrayList<>();
+        List<Integer> result = new LinkedList<>();
         Deque<TreeNode> stack = new LinkedList<>();
-        TreeNode node = root;
-        do {
-            for (TreeNode cur = node; cur.left != null; cur = cur.left) {
-                results.add(cur.val);
-                stack.push(cur);
+        stack.push(root);
+        result.add(root.val);
+        TreeNode p = root.left;
+        while (!stack.isEmpty() || p != null) {
+            while (p != null) {
+                result.add(p.val);
+                stack.push(p);
+                p = p.left;
             }
-            if (!stack.isEmpty()) {
-                node = stack.pop();
-            }
-        } while (!stack.isEmpty());
-        return results;
+            p = stack.pop().right;
+        }
+        return result;
     }
 
     /**
      * 中序遍历（递归）
      */
-    public static List<Integer> inorderTraversal(final TreeNode root) {
+    public static List<Integer> inorderTraversalRecursive(final TreeNode root) {
         if (root == null) {
-            return new ArrayList<>(0);
+            return EMPTY_LIST;
         }
-        List<Integer> results = new LinkedList<>(inorderTraversal(root.left));
+        List<Integer> results = new LinkedList<>(inorderTraversalRecursive(root.left));
         results.add(root.val);
-        results.addAll(inorderTraversal(root.right));
+        results.addAll(inorderTraversalRecursive(root.right));
         return results;
     }
 
     /**
+     * 中序遍历（迭代）
+     */
+    public static List<Integer> inorderTraversalIterative(final TreeNode root) {
+        if (root == null) {
+            return new LinkedList<>();
+        }
+        Deque<TreeNode> stack = new LinkedList<>();
+        List<Integer> result = new LinkedList<>();
+        stack.push(root);
+        TreeNode p = root.left;
+        while (!stack.isEmpty() || (p != null)) {
+            while (p != null) {
+                stack.push(p);
+                p = p.left;
+            }
+            result.add((p = stack.pop()).val);
+            p = p.right;
+        }
+        return result;
+    }
+
+
+    /**
      * 后续遍历（递归）
      */
-    public static List<Integer> postorderTraversal(final TreeNode root) {
+    public static List<Integer> postorderTraversalRecursive(final TreeNode root) {
         if (root == null) {
-            return new ArrayList<>(0);
+            return EMPTY_LIST;
         }
-        List<Integer> results = new LinkedList<>(preorderTraversal(root.right));
-        results.addAll(postorderTraversal(root.right));
+        List<Integer> results = new LinkedList<>(preorderTraversalRecursive(root.right));
+        results.addAll(postorderTraversalRecursive(root.right));
         results.add(root.val);
         return results;
+    }
+
+    /**
+     * 后续遍历（迭代）
+     */
+    public static List<Integer> postorderTraversalIterative(final TreeNode root) {
+        if (root == null) {
+            return EMPTY_LIST;
+        }
+        Deque<TreeNode> stack = new LinkedList<>();
+        List<Integer> result = new LinkedList<>();
+        stack.push(root);
+        TreeNode p = root.left, q = null;
+        while (!stack.isEmpty()) {
+            while (p != null) {
+                stack.push(p);
+                p = p.left;
+            }
+            p = stack.pop();
+            if (p.right == null || (p.right == q)) {
+                q = p;
+                result.add(p.val);
+                p = null;
+            } else {
+                stack.push(p);
+                p = p.right;
+            }
+        }
+        return result;
     }
 
     /**
