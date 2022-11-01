@@ -295,6 +295,10 @@ public class SaturnJobUtil {
         }
 
         if (String.class.equals(fieldType)) {
+            if (StringUtils.isBlank(format)) {
+                log.error("日期注入失败，未配置注入格式");
+                throw new RuntimeException("format cannot be null");
+            }
             field.set(target, new SimpleDateFormat(format).format(date));
             return;
         }
